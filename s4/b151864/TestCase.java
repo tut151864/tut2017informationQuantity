@@ -48,7 +48,7 @@ public class TestCase {
         myObject.setTarget("".getBytes());
         freq = myObject.frequency();
         if(freq != -1){
-            System.out.println(",program is wrong");
+            System.out.println("program is wrong");
             
         }
         
