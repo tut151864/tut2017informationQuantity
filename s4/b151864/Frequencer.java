@@ -22,23 +22,55 @@ public class Frequencer implements FrequencerInterface{
     public void setTarget(byte [] target) { myTarget = target;}
     public void setSpace(byte []space) { mySpace = space; }
     public int frequency() {
-	int targetLength = myTarget.length;
-	int spaceLength = mySpace.length;
-	int count = 0;
-	for(int start = 0; start<spaceLength; start++) { // Is it OK?
-	    boolean abort = false;
-	    for(int i = 0; i<targetLength; i++) {
-		if(myTarget[i] != mySpace[start+i]) { abort = true; break; }
-	    }
-	    if(abort == false) { count++; }
-	}
-	return count;
+        if(myTarget == null){
+            if(mySpace == null){
+                return 0;
+            }
+            return -1;
+        }
+        if(mySpace == null){
+            if(myTarget == null){
+                return -1;
+            }
+            return 0;
+        }
+        
+        int targetLength = myTarget.length;
+        int spaceLength = mySpace.length;
+        int count = 0;
+        
+        if(targetLength == 0){
+            return -1;
+        }
+        
+        if(spaceLength == 0){
+            return 0;
+        }
+        
+        for(int start = 0; start<spaceLength; start++) { // Is it OK?
+            boolean abort = false;
+            if(subByteFrequency(spaceLength - start,targetLength) == 0){
+                return count;
+            }
+  
+            for(int i = 0; i<targetLength; i++) {
+                
+                if(myTarget[i] != mySpace[start+i]) { abort = true;
+                    break; }
+            }
+            if(abort == false) { count++; }
+        }
+        return count;
     }
 
     // I know that here is a potential problem in the declaration.
     public int subByteFrequency(int start, int length) { 
 	// Not yet, but it is not currently used by anyone.
-	return -1;
+        int result;
+        
+        result = start - length + 1;
+ 
+        return result;
     }
 
     public static void main(String[] args) {

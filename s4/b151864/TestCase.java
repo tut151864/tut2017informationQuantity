@@ -34,23 +34,38 @@ public class TestCase {
     public static void main(String[] args) {
 	try {
 	    FrequencerInterface  myObject;
+        
 	    int freq;
 	    System.out.println("checking s4.b151864.Frequencer");
 	    myObject = new s4.b151864.Frequencer();
         myObject.setSpace("".getBytes());
         myObject.setTarget("H".getBytes());
         freq = myObject.frequency();
-        if(freq != 0){
+        System.out.println("no space and target is H");
+        if(freq == 0){
+            System.out.println("Space's length is zero");
+        }else{
             System.out.println("program is wrong");
-            
         }
+        
+        
         myObject.setSpace("Hi Ho Hi Ho".getBytes());
         myObject.setTarget("".getBytes());
         freq = myObject.frequency();
-        if(freq != -1){
-            System.out.println("program is wrong");
+        System.out.println("space is Hi Ho Hi Ho and no target");
+        if(freq == -1){
+            System.out.println("Target's length is zero");
             
+        }else{
+            System.out.println("program is wrong");
         }
+       
+        //System.out.println("a".getBytes());
+        
+        myObject.setSpace("Hi Ho Hi Ho HHH HHH HHH".getBytes());
+        myObject.setTarget("HHH".getBytes());
+        freq = myObject.frequency();
+        System.out.print("\"HHH\" in \"Hi Ho Hi Ho HHH HHH HHH\" appears "+freq+" times. ");
         
 	    myObject.setSpace("Hi Ho Hi Ho".getBytes());
 	    myObject.setTarget("H".getBytes());
@@ -78,15 +93,21 @@ public class TestCase {
         myObject.setSpace("3210321001230123".getBytes());
         myObject.setTarget("".getBytes());
         value = myObject.estimation();
-        if(value != 0.0){
+        System.out.println("Space is 3210321001230123 and no target ");
+        if(value == 0.0){
+            System.out.println("Target's length is zero");
+        }else{
             System.out.println("program is wrong");
         }
         
         myObject.setSpace("".getBytes());
         myObject.setTarget("0".getBytes());
         value = myObject.estimation();
+        System.out.println("no Space and target is 0");
 
-        if(value != Double.MAX_VALUE){
+        if(value == Double.MAX_VALUE){
+            System.out.println("Space's length is zero");
+        }else{
             System.out.println("program is wrong");
         }
         
