@@ -105,7 +105,7 @@ public	class	Frequencer	implements	FrequencerInterface{
                     //	"start"	and	"end"	are	same	as	in	subByteStartIndex,	and	subByteEndIndex	**
                     //	target_start_end	is	subBytes(start,	end)	of	target	**
                     //	comparing	suffix_i	and	target_start_end	by	dictonary	order	with	limitation of	length; ***
-                    //	if	the	beginning	of	suffix_i	matches	target_start_end,	and	suffix	is	longerthan	target		it	returns	0;
+                    //	if	the	beginning	of	suffix_i	matches	target_start_end,	and	suffix	is	longer than	target		it	returns	0;
                     //	if	suffix_i	>	target_start_end	it	return	1; **
                     //	if	suffix_i	< target_start_end	it	return	-1 ** 								//
                     //	It	should	be	used	to	search	the	apropriate	index	of	some	suffix.
@@ -123,6 +123,7 @@ public	class	Frequencer	implements	FrequencerInterface{
                     
                     int	si	=	suffixArray[i];
                     for(int j = start; j < end;j++){
+                        if((si+j) == mySpace.length) return -1;
                         if(mySpace[si+j] > myTarget[j]) return 1;
                         if(mySpace[si+j] < myTarget[j]) return -1;
                     }
@@ -191,7 +192,7 @@ public	class	Frequencer	implements	FrequencerInterface{
                         frequencerObject	=	new	Frequencer();
                         frequencerObject.setSpace("Hi Ho Hi Ho".getBytes());
                         
-                         frequencerObject.setTarget(" ".getBytes());
+                         frequencerObject.setTarget("Ho ".getBytes());
                          int	result	=	frequencerObject.frequency();
                          System.out.print("Freq	=	"+	result+"	");
                          if(4	==	result)	{	System.out.println("OK");	}	
