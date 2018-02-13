@@ -76,16 +76,16 @@ public	class	Frequencer	implements	FrequencerInterface{
                     
                     
                     
-                    long start1 = System.nanoTime();
+                    //long start1 = System.nanoTime();
                     quick_sort_suffix(0,mySpace.length-1);
-                    long end1 = System.nanoTime();
+                    //long end1 = System.nanoTime();
                     
                     
                     
                     
                     
                     
-                    
+                    /*
                     long start2 = System.nanoTime();
                     int temp;
                     for(int j = 0;j < mySpace.length;j++){
@@ -98,7 +98,9 @@ public	class	Frequencer	implements	FrequencerInterface{
                             }
                         }
                     }
+                     
                     long end2 = System.nanoTime();
+                     */
                      
                      
                     /*	Example	from	"Hi	Ho	Hi	Ho"
@@ -115,17 +117,22 @@ public	class	Frequencer	implements	FrequencerInterface{
                      A:o	Hi	Ho
                      */
                     //
-                    printSuffixArray();
-                    System.out.println("Time1:" + (end1 - start1) / 1000000f + "ms");
-                    System.out.println("Time2:" + (end2 - start2) / 1000000f + "ms");
+                    //printSuffixArray();
+                    //System.out.println("Time1:" + (end1 - start1) / 1000000f + "ms");
+                    //System.out.println("Time2:" + (end2 - start2) / 1000000f + "ms");
                 }
 
                 public void quick_sort_suffix(int left,int right){
                 	if(left <= right){
-                		int temp;
-                		int piv = (left + right)/2;
+                		int temp,piv;
+                        if((left + right)%2 == 1){
+                                piv = (left + right)/2 + 1;
+                        }else{
+                                piv = (left + right)/2;
+                        }
+                		
                 		int l = left; int r = right;
-                		System.out.println(l + " " + r);
+                		//System.out.println(l + " " + r);
                 		while(l <= r){
                 			while(suffixCompare(l,piv) == -1){l++;}
                 			while(suffixCompare(r,piv) == 1){r--;}
@@ -195,13 +202,18 @@ public	class	Frequencer	implements	FrequencerInterface{
 
                     }
                     return	suffixArray.length;
+                    
+                    
                 }
+    
+    
+    
 				private	int	subByteEndIndex(int	start,	int	end)	{
                     //	It	returns	the	next	index	of	the	first	suffix	which	is	greater	than	subBytes;
                     //	not	implemented	yet
                     //	For	"Ho",	it	will	return	7		for	"Hi	Ho Hi Ho".
                     //	For	"Ho	",	it	will	return	7	for	"Hi	Ho Hi Ho".
-                    for(int i = 0; i < suffixArray.length; i++){
+                    for(int i = start; i < suffixArray.length; i++){
                         if(targetCompare(i,start,end) == 1){
                             return i;
                         }
@@ -223,7 +235,7 @@ public	class	Frequencer	implements	FrequencerInterface{
                      }*/
                     
                     int	first	=	subByteStartIndex(start,end);
-                    int	last1	=	subByteEndIndex(start,	end);
+                    int	last1	=	subByteEndIndex(first,	end);
                     //	inspection	code
                     /*
                      for(int	k=start;k<end;k++)	{
